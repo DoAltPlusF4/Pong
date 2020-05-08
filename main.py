@@ -18,9 +18,9 @@ class Application:
 
         self.sprite = Basic(
             self,
-            self.window.width//2-15,
-            self.window.height//2-15,
-            30, 30,
+            self.window.width//2-10,
+            self.window.height//2-10,
+            20, 20,
             (255, 255, 255)
         )
 
