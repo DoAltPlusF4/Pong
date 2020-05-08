@@ -9,6 +9,8 @@ class Basic:
         self.w, self.h = width, height
         self.colour = colour
 
+        self.vx, self.vy = 0, 0
+
         self.shape = pyglet.shapes.Rectangle(
             self.x, self.y,
             self.w, self.h,
@@ -16,7 +18,9 @@ class Basic:
             batch=self.application.batch
         )
 
-    def update(self):
+    def update(self, dt):
+        self.x += self.vx*dt
+        self.y += self.vy*dt
         self.shape.position = self.x, self.y
 
     @property

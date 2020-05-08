@@ -1,3 +1,5 @@
+import random
+
 from .basic import Basic
 
 
@@ -10,3 +12,5 @@ class Ball(Basic):
             20, 20,
             (255, 255, 255)
         )
+        self.vx = random.choice([-200, 200])
+        self.vy = random.randint(-75, 75)
