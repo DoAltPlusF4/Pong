@@ -2,6 +2,7 @@ import pyglet
 from pyglet.window import key, mouse
 
 from source.ball import Ball
+from source.paddle import Paddle
 
 
 class Application:
@@ -42,6 +43,9 @@ class Application:
             batch=self.batch
         ))
 
+        self.paddle_1 = Paddle(self, 1)
+        self.paddle_2 = Paddle(self, 2)
+
         self.ball = Ball(self)
 
     def on_draw(self):
@@ -49,6 +53,8 @@ class Application:
         self.batch.draw()
 
     def update(self, dt):
+        self.paddle_1.update(dt)
+        self.paddle_2.update(dt)
         self.ball.update(dt)
 
     def run(self):
