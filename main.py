@@ -26,7 +26,7 @@ class Application:
         self.ball.update(dt)
 
     def run(self):
-        pyglet.clock.schedule_interval(self.update, 1/60)
+        pyglet.clock.schedule_interval(self.update, 1/144)
         pyglet.app.run()
 
 
