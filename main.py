@@ -16,18 +16,31 @@ class Application:
         self.key_handler = key.KeyStateHandler()
         self.window.push_handlers(self.key_handler)
 
-        self.bottom_border = pyglet.shapes.Rectangle(
-            0, 0,
-            self.window.width, 30,
+        self.borders = []
+        self.borders.append(pyglet.shapes.Rectangle(  # Top
+            x=0, y=self.window.height,
+            width=self.window.width, height=-30,
             color=(255, 255, 255),
             batch=self.batch
-        )
-        self.top_border = pyglet.shapes.Rectangle(
-            0, self.window.height,
-            self.window.width, -30,
+        ))
+        self.borders.append(pyglet.shapes.Rectangle(  # Right
+            x=0, y=0,
+            width=25, height=self.window.height,
             color=(255, 255, 255),
             batch=self.batch
-        )
+        ))
+        self.borders.append(pyglet.shapes.Rectangle(  # Bottom
+            x=0, y=0,
+            width=self.window.width, height=30,
+            color=(255, 255, 255),
+            batch=self.batch
+        ))
+        self.borders.append(pyglet.shapes.Rectangle(  # Left
+            x=self.window.width, y=0,
+            width=-25, height=self.window.height,
+            color=(255, 255, 255),
+            batch=self.batch
+        ))
 
         self.ball = Ball(self)
 

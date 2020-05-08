@@ -18,8 +18,8 @@ class Ball(Basic):
     def update(self, dt):
         collided = False
         if (
-            self.aabb[0] < 30 or
-            self.aabb[2] > self.application.window.width -30
+            self.aabb[0] < 25 or
+            self.aabb[2] > self.application.window.width - 25
         ):
             self.vx *= -1
             collided = True
