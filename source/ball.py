@@ -12,8 +12,8 @@ class Ball(Basic):
             20, 20,
             (255, 255, 255)
         )
-        self.vx = random.choice([-200, 200])
-        self.vy = random.randint(-150, 150)
+        self.vx = random.choice([-250, 250])
+        self.vy = random.randint(-175, 175)
 
     def update(self, dt):
         if (
