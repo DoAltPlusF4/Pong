@@ -19,7 +19,7 @@ class Application:
         self.borders = []
         self.borders.append(pyglet.shapes.Rectangle(  # Top
             x=0, y=self.window.height,
-            width=self.window.width, height=-30,
+            width=self.window.width, height=-25,
             color=(255, 255, 255),
             batch=self.batch
         ))
@@ -31,7 +31,7 @@ class Application:
         ))
         self.borders.append(pyglet.shapes.Rectangle(  # Bottom
             x=0, y=0,
-            width=self.window.width, height=30,
+            width=self.window.width, height=25,
             color=(255, 255, 255),
             batch=self.batch
         ))
