@@ -16,31 +16,27 @@ class Ball(Basic):
         self.vy = random.randint(-175, 175)
 
     def update(self, dt):
+        collided = False
         if (
             self.aabb[0] < 0 or
             self.aabb[2] > self.application.window.width
         ):
             self.vx *= -1
-
-            if self.vx < 0:
-                self.vx -= 10
-            else:
-                self.vx += 10
-            if self.vy < 0:
-                self.vy -= 10
-            else:
-                self.vy += 10
+            collided = True
 
         if (
             self.aabb[1] < 0 or
             self.aabb[3] > self.application.window.height
         ):
             self.vy *= -1
+            collided = True
 
+        if collided:
             if self.vx < 0:
                 self.vx -= 10
             else:
                 self.vx += 10
+
             if self.vy < 0:
                 self.vy -= 10
             else:
