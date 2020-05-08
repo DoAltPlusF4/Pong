@@ -22,10 +22,28 @@ class Ball(Basic):
         ):
             self.vx *= -1
 
+            if self.vx < 0:
+                self.vx -= 100
+            else:
+                self.vx += 100
+            if self.vy < 0:
+                self.vy -= 100
+            else:
+                self.vy += 100
+
         if (
             self.aabb[1] < 0 or
             self.aabb[3] > self.application.window.height
         ):
             self.vy *= -1
+
+            if self.vx < 0:
+                self.vx -= 100
+            else:
+                self.vx += 100
+            if self.vy < 0:
+                self.vy -= 100
+            else:
+                self.vy += 100
 
         super().update(dt)
