@@ -31,6 +31,13 @@ class Ball(Basic):
             self.vy *= -1
             collided = True
 
+        if self.aabbCheck(self.application.paddle_1):
+            self.vx *= -1
+            collided = True
+        if self.aabbCheck(self.application.paddle_2):
+            self.vx *= -1
+            collided = True
+
         if collided:
             if self.vx < 0:
                 self.vx -= 5
@@ -41,10 +48,5 @@ class Ball(Basic):
                 self.vy -= 5
             else:
                 self.vy += 5
-
-        if self.aabbCheck(self.application.paddle_1):
-            self.vx *= -1
-        if self.aabbCheck(self.application.paddle_2):
-            self.vx *= -1
 
         super().update(dt)
