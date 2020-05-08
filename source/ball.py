@@ -25,8 +25,8 @@ class Ball(Basic):
             collided = True
 
         if (
-            self.aabb[1] < 0 or
-            self.aabb[3] > self.application.window.height
+            self.aabb[1] < 30 or
+            self.aabb[3] > self.application.window.height - 30
         ):
             self.vy *= -1
             collided = True
