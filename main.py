@@ -7,6 +7,8 @@ from source.paddle import Paddle
 
 class Application:
     def __init__(self):
+        pyglet.font.add_file("resources/bit5x3.ttf")
+
         self.window = pyglet.window.Window(
             width=960,
             height=720
@@ -43,19 +45,55 @@ class Application:
             batch=self.batch
         ))
 
+        self.win_text_raw = None
+        self.win_text = None
+        self.win_timer = 0
+
         self.paddle_1 = Paddle(self, 1)
         self.paddle_2 = Paddle(self, 2)
 
+        self.score_1 = 0
+        self.score_2 = 0
+
         self.ball = Ball(self)
+
+        self.score_label_1 = pyglet.text.Label(
+            text=str(self.score_1),
+            font_name="Bit5x3",
+            font_size=90,
+            batch=self.batch,
+            anchor_x="right",
+            x=self.window.width//2-50,
+            y=self.window.height-110
+        )
+        self.score_label_2 = pyglet.text.Label(
+            text=str(self.score_2),
+            font_name="Bit5x3",
+            font_size=90,
+            batch=self.batch,
+            anchor_x="left",
+            x=self.window.width//2+50,
+            y=self.window.height-110
+        )
 
     def on_draw(self):
         self.window.clear()
         self.batch.draw()
 
     def update(self, dt):
-        self.paddle_1.update(dt)
-        self.paddle_2.update(dt)
-        self.ball.update(dt)
+        if self.win_text_raw is None:
+            self.paddle_1.update(dt)
+            self.paddle_2.update(dt)
+            self.ball.update(dt)
+        else:
+            if self.win_timer < 1:
+                self.win_timer += dt
+            else:
+                self.win_timer = 0
+                if self.win_text.text == "":
+                    self.win_text.text = self.win_text_raw
+                else:
+                    self.win_text.text = ""
 
     def run(self):
         pyglet.clock.schedule_interval(self.update, 1/144)

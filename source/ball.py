@@ -1,4 +1,7 @@
 import random
+import time
+
+import pyglet
 
 from .basic import Basic
 
@@ -14,15 +17,48 @@ class Ball(Basic):
         )
         self.vx = random.choice([-200, 200])
         self.vy = random.randint(-175, 175)
+        self.wait_time = 0
 
     def update(self, dt):
+        if self.wait_time < 0.25:
+            self.wait_time += dt
+            return
+
         collided = False
         if (
-            self.aabb[0] < 25 or
+            self.aabb[0] < 25
+        ):
+            self.application.score_2 += 1
+            self.application.score_label_2.text = str(self.application.score_2)
+            self.__init__(self.application)
+            if self.application.score_2 >= 10:
+                self.application.win_text_raw = "Player 2 Wins!"
+                self.application.win_text = pyglet.text.Label(
+                    text=self.application.win_text_raw,
+                    font_name="Bit5x3",
+                    font_size=70,
+                    batch=self.application.batch,
+                    anchor_x="center",
+                    x=self.application.window.width//2,
+                    y=self.application.window.height//2
+                )
+        elif (
             self.aabb[2] > self.application.window.width - 25
         ):
-            self.vx *= -1
-            collided = True
+            self.application.score_1 += 1
+            self.application.score_label_1.text = str(self.application.score_1)
+            self.__init__(self.application)
+            if self.application.score_1 >= 10:
+                self.application.win_text_raw = "Player 1 Wins!"
+                self.application.win_text = pyglet.text.Label(
+                    text=self.application.win_text_raw,
+                    font_name="Bit5x3",
+                    font_size=70,
+                    batch=self.application.batch,
+                    anchor_x="center",
+                    x=self.application.window.width//2,
+                    y=self.application.window.height//2
+                )
 
         if (
             self.aabb[1] < 25 or
