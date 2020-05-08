@@ -41,12 +41,16 @@ class Ball(Basic):
         if collided:
             if self.vx < 0:
                 self.vx -= 5
+                self.vx = max(-600, self.vx)
             else:
                 self.vx += 5
+                self.vx = min(600, self.vx)
 
             if self.vy < 0:
                 self.vy -= 5
+                self.vy = max(-600, self.vy)
             else:
                 self.vy += 5
+                self.vy = min(600, self.vy)
 
         super().update(dt)

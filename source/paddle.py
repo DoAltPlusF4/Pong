@@ -27,14 +27,14 @@ class Paddle(Basic):
         self.vy = 0
         if self.player == 1:
             if self.application.key_handler[key.W]:
-                self.vy += 600
+                self.vy += 750
             if self.application.key_handler[key.S]:
-                self.vy -= 600
+                self.vy -= 750
         elif self.player == 2:
             if self.application.key_handler[key.UP]:
-                self.vy += 600
+                self.vy += 750
             if self.application.key_handler[key.DOWN]:
-                self.vy -= 600
+                self.vy -= 750
 
         if self.aabb[3] > self.application.window.height-25:
             if self.vy > 0:
