@@ -1,6 +1,8 @@
 import pyglet
 from pyglet.window import key, mouse
 
+from source.basic import Basic
+
 
 class Application:
     def __init__(self):
@@ -9,19 +11,22 @@ class Application:
             height=720
         )
         self.window.push_handlers(self)
+        self.batch = pyglet.graphics.Batch()
 
         self.key_handler = key.KeyStateHandler()
         self.window.push_handlers(self.key_handler)
 
-        self.sprite = pyglet.shapes.Rectangle(
-            x=self.window.width//2-15,
-            y=self.window.height//2-15,
-            width=30, height=30
+        self.sprite = Basic(
+            self,
+            self.window.width//2-15,
+            self.window.height//2-15,
+            30, 30,
+            (255, 255, 255)
         )
 
     def on_draw(self):
         self.window.clear()
-        self.sprite.draw()
+        self.batch.draw()
 
     def update(self, dt):
         movement_speed = 60
@@ -45,6 +50,8 @@ class Application:
             self.sprite.y -= movement_speed * dt
         if self.key_handler[key.D]:
             self.sprite.x += movement_speed * dt
+
+        self.sprite.update()
 
     def run(self):
         pyglet.clock.schedule_interval(self.update, 1/60)
