@@ -12,7 +12,7 @@ class Ball(Basic):
             20, 20,
             (255, 255, 255)
         )
-        self.vx = random.choice([-250, 250])
+        self.vx = random.choice([-200, 200])
         self.vy = random.randint(-175, 175)
 
     def update(self, dt):
@@ -33,13 +33,13 @@ class Ball(Basic):
 
         if collided:
             if self.vx < 0:
-                self.vx -= 10
+                self.vx -= 5
             else:
-                self.vx += 10
+                self.vx += 5
 
             if self.vy < 0:
-                self.vy -= 10
+                self.vy -= 5
             else:
-                self.vy += 10
+                self.vy += 5
 
         super().update(dt)
