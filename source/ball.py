@@ -13,4 +13,4 @@ class Ball(Basic):
             (255, 255, 255)
         )
         self.vx = random.choice([-200, 200])
-        self.vy = random.randint(-75, 75)
+        self.vy = random.randint(-150, 150)
