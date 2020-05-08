@@ -7,7 +7,7 @@ from source.ball import Ball
 class Application:
     def __init__(self):
         self.window = pyglet.window.Window(
-            width=1280,
+            width=960,
             height=720
         )
         self.window.push_handlers(self)
