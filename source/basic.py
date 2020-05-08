@@ -23,6 +23,14 @@ class Basic:
         self.y += self.vy*dt
         self.shape.position = self.x, self.y
 
+    def aabbCheck(self, other):
+        return (
+            self.aabb[0] < other.aabb[2] and
+            self.aabb[2] > other.aabb[0] and
+            self.aabb[1] < other.aabb[3] and
+            self.aabb[3] > other.aabb[1]
+        )
+
     @property
     def aabb(self):
         return (

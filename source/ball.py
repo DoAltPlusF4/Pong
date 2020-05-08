@@ -42,4 +42,9 @@ class Ball(Basic):
             else:
                 self.vy += 5
 
+        if self.aabbCheck(self.application.paddle_1):
+            self.vx *= -1
+        if self.aabbCheck(self.application.paddle_2):
+            self.vx *= -1
+
         super().update(dt)
