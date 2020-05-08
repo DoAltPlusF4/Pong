@@ -4,27 +4,19 @@ from pyglet.window import key, mouse
 
 class Application:
     def __init__(self):
-        self.loadResources()
-        self.window = pyglet.window.Window()
+        self.window = pyglet.window.Window(
+            width=800,
+            height=600
+        )
         self.window.push_handlers(self)
 
         self.key_handler = key.KeyStateHandler()
         self.window.push_handlers(self.key_handler)
 
-        self.sprite = pyglet.sprite.Sprite(
-            self.resources["blue"],
-            x=self.window.width//2,
-            y=self.window.height//2
-        )
-
-    def loadResources(self):
-        self.resources = {}
-
-        self.resources["blue"] = pyglet.resource.image(
-            "resources/square_blue.png"
-        )
-        self.resources["red"] = pyglet.resource.image(
-            "resources/square_red.png"
+        self.sprite = pyglet.shapes.Rectangle(
+            x=self.window.width//2-15,
+            y=self.window.height//2-15,
+            width=30, height=30
         )
 
     def on_draw(self):
