@@ -8,6 +8,12 @@ from source.paddle import Paddle
 class Application:
     def __init__(self):
         pyglet.font.add_file("resources/bit5x3.ttf")
+        self.bounce = pyglet.media.load(
+            "resources/bounce.wav", streaming=False
+        )
+        self.win = pyglet.media.load(
+            "resources/win.wav", streaming=False
+        )
 
         self.window = pyglet.window.Window(
             width=960,

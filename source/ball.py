@@ -30,6 +30,7 @@ class Ball(Basic):
         ):
             self.application.score_2 += 1
             self.application.score_label_2.text = str(self.application.score_2)
+            self.application.win.play()
             self.__init__(self.application)
             if self.application.score_2 >= 10:
                 self.application.win_text_raw = "Player 2 Wins!"
@@ -47,6 +48,7 @@ class Ball(Basic):
         ):
             self.application.score_1 += 1
             self.application.score_label_1.text = str(self.application.score_1)
+            self.application.win.play()
             self.__init__(self.application)
             if self.application.score_1 >= 10:
                 self.application.win_text_raw = "Player 1 Wins!"
@@ -75,6 +77,7 @@ class Ball(Basic):
             collided = True
 
         if collided:
+            self.application.bounce.play()
             if self.vx < 0:
                 self.vx -= 5
                 self.vx = max(-600, self.vx)
