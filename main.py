@@ -1,7 +1,7 @@
 import pyglet
 from pyglet.window import key, mouse
 
-from source.basic import Basic
+from source.ball import Ball
 
 
 class Application:
@@ -16,13 +16,7 @@ class Application:
         self.key_handler = key.KeyStateHandler()
         self.window.push_handlers(self.key_handler)
 
-        self.sprite = Basic(
-            self,
-            self.window.width//2-10,
-            self.window.height//2-10,
-            20, 20,
-            (255, 255, 255)
-        )
+        self.sprite = Ball(self)
 
     def on_draw(self):
         self.window.clear()
