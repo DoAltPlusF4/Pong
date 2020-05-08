@@ -23,13 +23,13 @@ class Ball(Basic):
             self.vx *= -1
 
             if self.vx < 0:
-                self.vx -= 100
+                self.vx -= 10
             else:
-                self.vx += 100
+                self.vx += 10
             if self.vy < 0:
-                self.vy -= 100
+                self.vy -= 10
             else:
-                self.vy += 100
+                self.vy += 10
 
         if (
             self.aabb[1] < 0 or
@@ -38,12 +38,12 @@ class Ball(Basic):
             self.vy *= -1
 
             if self.vx < 0:
-                self.vx -= 100
+                self.vx -= 10
             else:
-                self.vx += 100
+                self.vx += 10
             if self.vy < 0:
-                self.vy -= 100
+                self.vy -= 10
             else:
-                self.vy += 100
+                self.vy += 10
 
         super().update(dt)
