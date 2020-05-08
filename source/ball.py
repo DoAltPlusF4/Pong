@@ -31,7 +31,6 @@ class Ball(Basic):
             self.application.score_2 += 1
             self.application.score_label_2.text = str(self.application.score_2)
             self.application.win.play()
-            self.__init__(self.application)
             if self.application.score_2 >= 10:
                 self.application.win_text_raw = "Player 2 Wins!"
                 self.application.win_text = pyglet.text.Label(
@@ -43,13 +42,14 @@ class Ball(Basic):
                     x=self.application.window.width//2,
                     y=self.application.window.height//2
                 )
+            else:
+                self.__init__(self.application)
         elif (
             self.aabb[2] > self.application.window.width - 25
         ):
             self.application.score_1 += 1
             self.application.score_label_1.text = str(self.application.score_1)
             self.application.win.play()
-            self.__init__(self.application)
             if self.application.score_1 >= 10:
                 self.application.win_text_raw = "Player 1 Wins!"
                 self.application.win_text = pyglet.text.Label(
@@ -61,6 +61,8 @@ class Ball(Basic):
                     x=self.application.window.width//2,
                     y=self.application.window.height//2
                 )
+            else:
+                self.__init__(self.application)
 
         if (
             self.aabb[1] < 25 or
