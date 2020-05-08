@@ -7,9 +7,9 @@ class Ball(Basic):
     def __init__(self, application):
         super().__init__(
             application,
-            application.window.width//2-10,
-            application.window.height//2-10,
-            20, 20,
+            application.window.width//2-7,
+            application.window.height//2-7,
+            14, 14,
             (255, 255, 255)
         )
         self.vx = random.choice([-200, 200])
@@ -18,8 +18,8 @@ class Ball(Basic):
     def update(self, dt):
         collided = False
         if (
-            self.aabb[0] < 0 or
-            self.aabb[2] > self.application.window.width
+            self.aabb[0] < 30 or
+            self.aabb[2] > self.application.window.width -30
         ):
             self.vx *= -1
             collided = True
