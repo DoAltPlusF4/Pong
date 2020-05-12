@@ -1,41 +1,39 @@
 import pyglet
+import pymunk
 
 
-class Basic:
-    def __init__(self, application, x, y, width, height, colour):
+class Basic(pymunk.Body):
+    def __init__(self, application, x, y, width, height, colour, physics_type=None, collision_type=None):
         self.application = application
 
-        self.x, self.y = x, y
-        self.w, self.h = width, height
         self.colour = colour
 
-        self.vx, self.vy = 0, 0
+        if physics_type is None:
+            physics_type = pymunk.Body.STATIC
 
-        self.shape = pyglet.shapes.Rectangle(
-            self.x, self.y,
-            self.w, self.h,
+        super().__init__(mass=1, moment=float("inf"), body_type=physics_type)
+        self.position = (x, y)
+        self.collider = pymunk.Poly(
+            body=self,
+            vertices=[
+                (0, 0),
+                (width, 0),
+                (width, height),
+                (0, height)
+            ]
+        )
+        self.collider.elasticity = 1.01
+        if collision_type is not None:
+            self.collider.collision_type = collision_type
+
+        self.application.space.add(self, self.collider)
+
+        self.shape_sprite = pyglet.shapes.Rectangle(
+            self.position.x, self.position.y,
+            width, height,
             color=self.colour,
             batch=self.application.batch
         )
 
     def update(self, dt):
-        self.x += self.vx*dt
-        self.y += self.vy*dt
-        self.shape.position = self.x, self.y
-
-    def aabbCheck(self, other):
-        return (
-            self.aabb[0] < other.aabb[2] and
-            self.aabb[2] > other.aabb[0] and
-            self.aabb[1] < other.aabb[3] and
-            self.aabb[3] > other.aabb[1]
-        )
-
-    @property
-    def aabb(self):
-        return (
-            self.x,
-            self.y,
-            self.x + self.w,
-            self.y + self.h
-        )
+        self.shape_sprite.position = self.position.x, self.position.y

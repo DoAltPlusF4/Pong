@@ -1,4 +1,5 @@
 import pyglet
+import pymunk
 from pyglet.window import key, mouse
 
 from .basic import Basic
@@ -12,35 +13,54 @@ class Paddle(Basic):
                 application,
                 50, (application.window.height//2)-50,
                 25, 100,
-                (255, 255, 255)
+                (255, 255, 255),
+                physics_type=pymunk.Body.DYNAMIC,
+                collision_type=2
+            )
+            self.groove = pymunk.GrooveJoint(
+                self.application.space.static_body,
+                self,
+                (50, 25),
+                (50, application.window.height-25),
+                (0, 0)
             )
         elif self.player == 2:
             super().__init__(
                 application,
                 application.window.width-75, (application.window.height//2)-50,
                 25, 100,
-                (255, 255, 255)
+                (255, 255, 255),
+                physics_type=pymunk.Body.DYNAMIC,
+                collision_type=2
             )
+            self.groove = pymunk.GrooveJoint(
+                self.application.space.static_body,
+                self,
+                (application.window.width-75, 25),
+                (application.window.width-75, application.window.height-25),
+                (0, 0)
+            )
+        self.application.space.add(self.groove)
 
     def update(self, dt):
-        self.vx = 0
-        self.vy = 0
         if self.player == 1:
-            if self.application.key_handler[key.W]:
-                self.vy += 750
-            if self.application.key_handler[key.S]:
-                self.vy -= 750
+            controls = {
+                "up": self.application.key_handler[key.W],
+                "down": self.application.key_handler[key.S],
+            }
         elif self.player == 2:
-            if self.application.key_handler[key.UP]:
-                self.vy += 750
-            if self.application.key_handler[key.DOWN]:
-                self.vy -= 750
+            controls = {
+                "up": self.application.key_handler[key.UP],
+                "down": self.application.key_handler[key.DOWN],
+            }
 
-        if self.aabb[3] > self.application.window.height-25:
-            if self.vy > 0:
-                self.vy = 0
-        if self.aabb[1] < 25:
-            if self.vy < 0:
-                self.vy = 0
+        vy = 0
+
+        if controls["up"] and self.position.y < self.application.window.height-125:
+            vy += 750
+        if controls["down"] and self.position.y > 25:
+            vy -= 750
+
+        self.velocity = (0, vy)
 
         super().update(dt)
