@@ -11,7 +11,13 @@ from source.paddle import Paddle
 
 
 class Application:
+    """
+    Application class. 
+    Create an instance and use Application.run() to run.
+    """
+
     def __init__(self):
+        """Initialise all the objects required."""
         self.loadResources()
         self.window = pyglet.window.Window(
             width=960,
@@ -91,6 +97,7 @@ class Application:
         )
 
     def loadResources(self):
+        """Loads all the required resources."""
         pyglet.font.add_file("resources/bit5x3.ttf")
         self.paddle = pyglet.media.load(
             "resources/paddle.wav", streaming=False
@@ -106,6 +113,7 @@ class Application:
         self.win.play()
 
     def createCollisionHandlers(self):
+        """Creates any necessary collision handlers."""
         def pre_solve(arbiter, space, data):
             border = arbiter.shapes[1].body
             if border == self.borders["right"]:
@@ -165,12 +173,18 @@ class Application:
         ball_paddle.post_solve = post_solve
 
     def on_draw(self):
+        """Draws the main batch."""
         self.window.clear()
         self.batch.draw()
         # debug_draw_options = pymunk.pyglet_util.DrawOptions()
         # self.space.debug_draw(debug_draw_options)
 
     def update(self, dt):
+        """ Updates all objects and steps the space.
+
+        :type dt: float
+        :param dt: Time passed since last frame.
+        """
         if self.wait < 0.25:
             self.wait += dt
             return
@@ -190,6 +204,7 @@ class Application:
         self.ball.update(dt)
 
     def run(self):
+        """Runs the application."""
         pyglet.clock.schedule_interval(self.update, 1/144)
         pyglet.app.run()
 

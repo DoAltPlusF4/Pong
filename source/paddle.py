@@ -6,7 +6,17 @@ from .basic import Basic
 
 
 class Paddle(Basic):
+    """A player's paddle, derived from Basic."""
+
     def __init__(self, application, player):
+        """ Initialise the paddle.
+
+        :type application: Application
+        :param application: The application itself.
+
+        :type player: int
+        :param player: The ID of the player, 1 or 2.
+        """
         self.player = player
         if self.player == 1:
             super().__init__(
@@ -43,6 +53,11 @@ class Paddle(Basic):
         self.application.space.add(self.groove)
 
     def update(self, dt):
+        """ Update the paddle.
+
+        :type dt: float
+        :param dt: Time passed since the last update.
+        """
         if self.player == 1:
             controls = {
                 "up": self.application.key_handler[key.W],

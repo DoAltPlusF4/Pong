@@ -8,7 +8,14 @@ from .basic import Basic
 
 
 class Ball(Basic):
+    """A ball, derived from Basic."""
+
     def __init__(self, application):
+        """ Initialise the ball with a random direction.
+
+        :type application: Application
+        :param application: The application itself.
+        """
         self.reset = False
 
         super().__init__(
@@ -26,6 +33,11 @@ class Ball(Basic):
         ))
 
     def update(self, dt):
+        """ Update the ball.
+
+        :type dt: float
+        :param dt: Time passed since last update call.
+        """
         if self.reset:
             self.position = (
                 self.application.window.width//2-7,

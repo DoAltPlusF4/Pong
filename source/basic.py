@@ -3,10 +3,36 @@ import pymunk
 
 
 class Basic(pymunk.Body):
-    def __init__(self, application, x, y, width, height, colour, physics_type=None, collision_type=None):
-        self.application = application
+    """A basic object class, derived from pymunk.Body."""
 
-        self.colour = colour
+    def __init__(self, application, x, y, width, height, colour, physics_type=None, collision_type=None):
+        """ Initialise the class with collider and sprite.
+
+        :type application: Application
+        :param application: The application itself.
+
+        :type x: float
+        :param x: The X position of the object
+
+        :type y: float
+        :param y: The Y position of the object
+
+        :type width: float
+        :param width: The width of the object
+
+        :type height: float
+        :param height: The height of the object
+
+        :type colour: tuple
+        :param colour: The RGB colour tuple for the sprite.
+
+        :type physics_type: int
+        :param physics_type: The physics type, pymunk.Body.<TYPE>.
+
+        :type collision_type: int
+        :param collision_type: The collision type ID.
+        """
+        self.application = application
 
         if physics_type is None:
             physics_type = pymunk.Body.STATIC
@@ -31,9 +57,14 @@ class Basic(pymunk.Body):
         self.shape_sprite = pyglet.shapes.Rectangle(
             self.position.x, self.position.y,
             width, height,
-            color=self.colour,
+            color=colour,
             batch=self.application.batch
         )
 
     def update(self, dt):
+        """ Update the position of the sprite.
+
+        :type dt: float
+        :param dt: Time passed since last update.=
+        """
         self.shape_sprite.position = self.position.x, self.position.y
